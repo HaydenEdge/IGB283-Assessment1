@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class IGB283Transform : MonoBehaviour {
 
-	public float speed = 5.0f;
-	public bool moveX = true;
-	public bool moveY = false;
     public float angle = 10f;
+    public float speed = 5.0f;
+    public float verticalPos;
+
+
+    private bool moveX = true;
+	private bool moveY = false;
+    private Vector3 offset;
     private Mesh mesh;
-    public Material material;
+    private Material material;
+
+
     
 
 
@@ -41,18 +47,47 @@ public class IGB283Transform : MonoBehaviour {
         };
 
         mesh.triangles = new int[] { 0, 1, 2 };
+
+        offset.x = mesh.bounds.size.x / 2;
+        offset.y = mesh.bounds.size.y / 2;
     }
 
 
 	// Update is called once per frame
 	void Update () {
-		Move (); //Just remove this line if you need
-	}
+        Move (); //Just remove this line if you need
+
+        // Get the vertices from the mesh
+        Vector3[] vertices = mesh.vertices;
+
+        // Get the transformation matrix
+        Matrix3x3 T = Translate(offset);
+        Matrix3x3 R = Rotate(angle * Time.deltaTime);
+        Matrix3x3 T2 = Translate(-offset);
+        Matrix3x3 M = T * R * T2;
+
+        // Rotate each point in the mesh to its new position
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            vertices[i] = M.MultiplyPoint(vertices[i]);
+        }
+
+        // Set the vertices in the mesh to their new position
+        
+        mesh.vertices = vertices;
+
+        // Recalculate the bounding volume
+        mesh.RecalculateBounds();
+
+    }
 
 
 	// Move the object (translation)
 	void Move() {
 		Vector3 position = this.transform.position;
+        //check if triangle has hit a boundry
+        speed = speed * BoundryCollision(position);
+        
 
 		// Change x-axis position
 		if (moveX == true) {
@@ -61,41 +96,57 @@ public class IGB283Transform : MonoBehaviour {
 
 		// Change y-axis position
 		if (moveY == true) {
-			position.y += Time.deltaTime * speed;
+			position.y += (Time.deltaTime * speed);
 		}
 
 		this.transform.position = position;
 	}
 
-    Matrix3x3 RotateMatrix( float angle)
+    Matrix3x3 Rotate( float angle)
     {
+        // Create a new matrix
         Matrix3x3 matrix = new Matrix3x3();
-        // set the rows of the matrix
+
+        // Set the rows of the matrix
         matrix.SetRow(0, new Vector3(Mathf.Cos(angle), -Mathf.Sin(angle), 0.0f));
         matrix.SetRow(1, new Vector3(Mathf.Sin(angle), Mathf.Cos(angle), 0.0f));
         matrix.SetRow(2, new Vector3(0.0f, 0.0f, 1.0f));
-        //return the matrix
+
+        // Return the matrix
         return matrix;
     }
     
-    void rotate()
+
+
+    Matrix3x3 Translate(Vector3 offset)
     {
-        Vector3[] verticies = mesh.vertices;
-        Matrix3x3 M = RotateMatrix(angle * Time.deltaTime);
+        // Create a new matrix
+        Matrix3x3 matrix = new Matrix3x3();
 
-        // rotate each point on mesh to new position
+        // Set the rows of the matrix
+        matrix.SetRow(0, new Vector3(1.0f, 0.0f, offset.x));
+        matrix.SetRow(1, new Vector3(0.0f, 1.0f, offset.y));
+        matrix.SetRow(2, new Vector3(0.0f, 0.0f, 1.0f));
 
-        for (int i = 0; i < verticies.Length; i++)
-        {
-            verticies[i] = M.MultiplyPoint(verticies[i]);
-        }
-        mesh.vertices = verticies;
-        //recalculate bounding volume of mesh
-        mesh.RecalculateBounds();
+        // Return the matrix
+        return matrix;
     }
 
-	// Rotation
+    // check if triangle has reached outer boundries
+    int BoundryCollision (Vector3 position)
+    {
+        if (position.x >= 0)
+        {
+            return -1;
+        } else if (position.x <= -10)
+        {
+            return -1;
+        } else
+        {
+            return 1;
+        }
+        
 
-	// Scaling
+    }
 
 }

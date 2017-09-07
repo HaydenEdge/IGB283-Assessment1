@@ -117,8 +117,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1603722627}
   - component: {fileID: 1603722626}
-  - component: {fileID: 1603722628}
-  - component: {fileID: 1603722629}
   m_Layer: 0
   m_Name: Triangle1
   m_TagString: Untagged
@@ -134,9 +132,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1603722625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04f0bd8a17066aa4d9cee6880a4672ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 8030752f96f162140b854fa74e1d8354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  angle: 10
+  speed: 5
+  verticalPos: 5
 --- !u!4 &1603722627
 Transform:
   m_ObjectHideFlags: 0
@@ -150,32 +151,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1603722628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1603722625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8030752f96f162140b854fa74e1d8354, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  moveX: 1
-  moveY: 0
---- !u!114 &1603722629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1603722625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 301d53bd1671a9640a39332e935bfaaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 0}
 --- !u!1 &1828847715
 GameObject:
   m_ObjectHideFlags: 0
