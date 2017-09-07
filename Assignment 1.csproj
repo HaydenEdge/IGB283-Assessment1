@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\IGB283Transform.cs" />
+    <Compile Include="Assets\Scripts\Matrix3x3.cs" />
     <Compile Include="Assets\Scripts\Triangle.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
