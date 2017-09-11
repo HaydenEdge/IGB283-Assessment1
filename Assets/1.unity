@@ -142,6 +142,7 @@ MonoBehaviour:
   verticalPos: 5
   moveX: 1
   moveY: 0
+  triangle: {fileID: 1603722625}
 --- !u!4 &1603722627
 Transform:
   m_ObjectHideFlags: 0

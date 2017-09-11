@@ -9,7 +9,7 @@ public class IGB283Transform : MonoBehaviour {
     public float speed = 5.0f;
 	public float maxSpeed = 10.0f;
 	private float minSpeed = -10.0f;
-	public float speedIncrement = 1.0f;
+	public float speedIncrement = 3.0f;
     public float verticalPos;
 	public bool moveX = true;
 	public bool moveY = false;
@@ -17,6 +17,9 @@ public class IGB283Transform : MonoBehaviour {
 	private Vector3 offset;
     private Mesh mesh;
     private Material material;
+
+    public GameObject triangle;
+    public GameObject triangle2;
 
 
 
@@ -49,6 +52,8 @@ public class IGB283Transform : MonoBehaviour {
 
         offset.x = mesh.bounds.size.x / 2;
         offset.y = mesh.bounds.size.y / 2;
+
+        
     }
 
 
@@ -148,10 +153,10 @@ public class IGB283Transform : MonoBehaviour {
     // check if triangle has reached outer boundries
     int BoundryCollision (Vector3 position)
     {
-        if (position.x >= 0)
+        if (position.x >= 5)
         {
             return -1;
-        } else if (position.x <= -10)
+        } else if (position.x <= -5)
         {
             return -1;
         } else
