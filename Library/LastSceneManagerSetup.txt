@@ -1,4 +1,4 @@
 sceneSetups:
-- path: E:/Uni Stuff/Game Engine Theory and Application/Workshops/Week 5/2/Assets/Carpet.unity
+- path: Assets/1.unity
   isLoaded: 1
   isActive: 1

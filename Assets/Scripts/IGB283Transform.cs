@@ -5,26 +5,27 @@ using UnityEngine;
 
 public class IGB283Transform : MonoBehaviour {
 
-    public float angle = 10f;
-    public float speed = 5.0f;
+    public float angle;
+    public float speed;
 	public float maxSpeed = 10.0f;
 	private float minSpeed = -10.0f;
 	public float speedIncrement = 3.0f;
     public float verticalPos;
 	public bool moveX = true;
 	public bool moveY = false;
-    
+
 	private Vector3 offset;
     private Mesh mesh;
     private Material material;
 
     public GameObject triangle;
-    public GameObject triangle2;
+
 
 
 
 	// Use this for initialization
-	void Start () {
+	public void Start () {
+
         gameObject.AddComponent<MeshFilter>();
         gameObject.AddComponent<MeshRenderer>();
 
@@ -54,11 +55,12 @@ public class IGB283Transform : MonoBehaviour {
         offset.y = mesh.bounds.size.y / 2;
 
         
+        
     }
 
 
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
         Move ();
 
         // Get the vertices from the mesh
