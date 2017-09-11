@@ -137,7 +137,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angle: 10
   speed: 5
+  maxSpeed: 10
+  speedIncrement: 1
   verticalPos: 5
+  moveX: 1
+  moveY: 0
 --- !u!4 &1603722627
 Transform:
   m_ObjectHideFlags: 0

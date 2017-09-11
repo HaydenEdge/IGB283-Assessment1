@@ -7,17 +7,16 @@ public class IGB283Transform : MonoBehaviour {
 
     public float angle = 10f;
     public float speed = 5.0f;
+	public float maxSpeed = 10.0f;
+	private float minSpeed = -10.0f;
+	public float speedIncrement = 1.0f;
     public float verticalPos;
-
-
-    private bool moveX = true;
-	private bool moveY = false;
-    private Vector3 offset;
+	public bool moveX = true;
+	public bool moveY = false;
+    
+	private Vector3 offset;
     private Mesh mesh;
     private Material material;
-
-
-    
 
 
 
@@ -55,7 +54,7 @@ public class IGB283Transform : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        Move (); //Just remove this line if you need
+        Move ();
 
         // Get the vertices from the mesh
         Vector3[] vertices = mesh.vertices;
@@ -73,7 +72,6 @@ public class IGB283Transform : MonoBehaviour {
         }
 
         // Set the vertices in the mesh to their new position
-        
         mesh.vertices = vertices;
 
         // Recalculate the bounding volume
@@ -85,9 +83,24 @@ public class IGB283Transform : MonoBehaviour {
 	// Move the object (translation)
 	void Move() {
 		Vector3 position = this.transform.position;
-        //check if triangle has hit a boundry
-        speed = speed * BoundryCollision(position);
         
+		//check if triangle has hit a boundry
+        speed = speed * BoundryCollision(position);
+
+		// Speed up or slow down on mouse clicks
+		if (Input.GetMouseButtonDown (0) && (speed < maxSpeed) && (speed > minSpeed)) {
+			if (speed >= 0) {
+				speed = speed + (speedIncrement);
+			} else if (speed < 0) {
+				speed = speed - (speedIncrement);
+			}
+		} else if (Input.GetMouseButtonDown (1) && (speed != 0)) {
+			if (speed > 0) {
+				speed = speed - (speedIncrement);
+			} else if (speed < 0) {
+				speed = speed + (speedIncrement);
+			}
+		}
 
 		// Change x-axis position
 		if (moveX == true) {
@@ -102,7 +115,7 @@ public class IGB283Transform : MonoBehaviour {
 		this.transform.position = position;
 	}
 
-    Matrix3x3 Rotate( float angle)
+    Matrix3x3 Rotate(float angle)
     {
         // Create a new matrix
         Matrix3x3 matrix = new Matrix3x3();
