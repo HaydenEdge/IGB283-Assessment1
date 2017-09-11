@@ -53,6 +53,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\IGB283Transform.cs" />
      <Compile Include="Assets\Scripts\Matrix3x3.cs" />
+     <Compile Include="Assets\Scripts\TriangleCloneInitiator.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Users/Hayden/Desktop/Unity 2017/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
