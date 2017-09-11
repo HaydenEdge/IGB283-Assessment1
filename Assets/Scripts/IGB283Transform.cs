@@ -7,16 +7,22 @@ public class IGB283Transform : MonoBehaviour {
 
     public float angle = 10f;
     public float speed = 5.0f;
-	public float maxSpeed = 10.0f;
-	private float minSpeed = -10.0f;
+	public float maxSpeed = 20.0f;
+	public float minSpeed = -20.0f;
 	public float speedIncrement = 1.0f;
+	public float maxX = 10.0f;
+	public float minX = -10.0f;
     public float verticalPos;
 	public bool moveX = true;
 	public bool moveY = false;
+
+	private float red = 1.0f;
+	private float green = 1.0f;
+	private float blue = 1.0f;
     
 	private Vector3 offset;
     private Mesh mesh;
-    private Material material;
+    public Material material;
 
 
 
@@ -38,13 +44,6 @@ public class IGB283Transform : MonoBehaviour {
 
         };
 
-        mesh.colors = new Color[] {
-            new Color (0.8f, 0.3f, 1.0f),
-            new Color (0.8f, 0.3f, 1.0f),
-            new Color (0.8f, 0.3f, 1.0f),
-
-        };
-
         mesh.triangles = new int[] { 0, 1, 2 };
 
         offset.x = mesh.bounds.size.x / 2;
@@ -56,6 +55,18 @@ public class IGB283Transform : MonoBehaviour {
 	void Update () {
         Move ();
 
+		// Determine the colours of the mesh based on position
+		red = (maxX / maxX) - (this.transform.position.x / maxX);
+		green = (maxX / maxX) - (this.transform.position.x / minX);
+		blue = (maxX / maxX) - (this.transform.position.x / maxX);
+
+		mesh.colors = new Color[] {
+			new Color (red, green, blue),
+			new Color (red, green, blue),
+			new Color (red, green, blue),
+
+		};
+
         // Get the vertices from the mesh
         Vector3[] vertices = mesh.vertices;
 
@@ -66,8 +77,7 @@ public class IGB283Transform : MonoBehaviour {
         Matrix3x3 M = T * R * T2;
 
         // Rotate each point in the mesh to its new position
-        for (int i = 0; i < vertices.Length; i++)
-        {
+        for (int i = 0; i < vertices.Length; i++) {
             vertices[i] = M.MultiplyPoint(vertices[i]);
         }
 
@@ -76,7 +86,6 @@ public class IGB283Transform : MonoBehaviour {
 
         // Recalculate the bounding volume
         mesh.RecalculateBounds();
-
     }
 
 
@@ -115,8 +124,8 @@ public class IGB283Transform : MonoBehaviour {
 		this.transform.position = position;
 	}
 
-    Matrix3x3 Rotate(float angle)
-    {
+
+    Matrix3x3 Rotate(float angle) {
         // Create a new matrix
         Matrix3x3 matrix = new Matrix3x3();
 
@@ -130,9 +139,7 @@ public class IGB283Transform : MonoBehaviour {
     }
     
 
-
-    Matrix3x3 Translate(Vector3 offset)
-    {
+    Matrix3x3 Translate(Vector3 offset) {
         // Create a new matrix
         Matrix3x3 matrix = new Matrix3x3();
 
@@ -145,21 +152,17 @@ public class IGB283Transform : MonoBehaviour {
         return matrix;
     }
 
+
     // check if triangle has reached outer boundries
     int BoundryCollision (Vector3 position)
     {
-        if (position.x >= 0)
-        {
+        if (position.x >= maxX) {
             return -1;
-        } else if (position.x <= -10)
-        {
+        } else if (position.x <= minX) {
             return -1;
-        } else
-        {
+        } else {
             return 1;
         }
-        
-
     }
 
 }

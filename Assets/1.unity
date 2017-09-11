@@ -138,10 +138,14 @@ MonoBehaviour:
   angle: 10
   speed: 5
   maxSpeed: 10
+  minSpeed: -20
   speedIncrement: 1
+  maxX: 10
+  minX: -10
   verticalPos: 5
   moveX: 1
   moveY: 0
+  material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!4 &1603722627
 Transform:
   m_ObjectHideFlags: 0
