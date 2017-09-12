@@ -12,13 +12,31 @@ public class TriangleCloneInitiator : MonoBehaviour {
     public GameObject triangle;
 
     private IGB283Transform[] triangleClone;
+    private GameObject transformClass;
 
 
-	// Use this for initialization
-	void Start () {
-        CreateClones();
+    // Use this for initialization
+    void Start () {
+
+        transformClass = Instantiate(triangle);
         
-	}
+        for (int i = 0; i < triangleNum; i++)
+        {
+            // creates instance of triangle in triangleClone[i]
+            triangleClone[i] = triangle.GetComponent<IGB283Transform>();
+            triangleClone[i].speed = cloneSpeedInitial;
+            triangleClone[i].angle = cloneAngleInitial;
+
+            triangleClone[i].DrawTriangle();
+            triangleClone[i].Start();
+
+            Instantiate(triangleClone[i]);
+            cloneSpeedInitial += cloneSpeedInterval;
+            cloneAngleInitial += cloneAngelInterval;
+        }
+    }
+
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -29,19 +47,9 @@ public class TriangleCloneInitiator : MonoBehaviour {
         }
 	}
 
-    void CreateClones()
-    {
-        // Instantiate clone instance
-        GameObject transformClass = Instantiate(triangle);
-        triangleClone = transformClass.GetComponent<IGB283Transform[]>();
 
-        for (int i = 0; i < triangleNum; i++)
-        {
-            triangleClone[i].speed = cloneSpeedInitial;
-            triangleClone[i].angle = cloneAngleInitial;
-            triangleClone[i].Start();
-            cloneSpeedInitial += cloneSpeedInterval;
-            cloneAngleInitial += cloneAngelInterval;
-        }
-    }
+        // Instantiate clone instance
+
+
+
 }

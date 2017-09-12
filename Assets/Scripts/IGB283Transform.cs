@@ -26,36 +26,8 @@ public class IGB283Transform : MonoBehaviour {
 	// Use this for initialization
 	public void Start () {
 
-        gameObject.AddComponent<MeshFilter>();
-        gameObject.AddComponent<MeshRenderer>();
+        DrawTriangle();
 
-        mesh = GetComponent<MeshFilter>().mesh;
-
-        GetComponent<MeshRenderer>().material = material;
-
-        mesh.Clear();
-
-        mesh.vertices = new Vector3[] {
-            new Vector3 (0, 0, 0),
-            new Vector3 (0, 1, 0),
-            new Vector3 (1, 1, 0),
-
-        };
-
-        mesh.colors = new Color[] {
-            new Color (0.8f, 0.3f, 1.0f),
-            new Color (0.8f, 0.3f, 1.0f),
-            new Color (0.8f, 0.3f, 1.0f),
-
-        };
-
-        mesh.triangles = new int[] { 0, 1, 2 };
-
-        offset.x = mesh.bounds.size.x / 2;
-        offset.y = mesh.bounds.size.y / 2;
-
-        
-        
     }
 
 
@@ -86,7 +58,36 @@ public class IGB283Transform : MonoBehaviour {
 
     }
 
+    public void DrawTriangle()
+    {
+        gameObject.AddComponent<MeshFilter>();
+        gameObject.AddComponent<MeshRenderer>();
 
+        mesh = GetComponent<MeshFilter>().mesh;
+
+        GetComponent<MeshRenderer>().material = material;
+
+        mesh.Clear();
+
+        mesh.vertices = new Vector3[] {
+            new Vector3 (0, 0, 0),
+            new Vector3 (0, 1, 0),
+            new Vector3 (1, 1, 0),
+
+        };
+
+        mesh.colors = new Color[] {
+            new Color (0.8f, 0.3f, 1.0f),
+            new Color (0.8f, 0.3f, 1.0f),
+            new Color (0.8f, 0.3f, 1.0f),
+
+        };
+
+        mesh.triangles = new int[] { 0, 1, 2 };
+
+        offset.x = mesh.bounds.size.x / 2;
+        offset.y = mesh.bounds.size.y / 2;
+    }
 	// Move the object (translation)
 	void Move() {
 		Vector3 position = this.transform.position;
