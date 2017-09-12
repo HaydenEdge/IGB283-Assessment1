@@ -26,7 +26,7 @@ public class IGB283Transform : MonoBehaviour {
 	// Use this for initialization
 	public void Start () {
 
-        DrawTriangle();
+        
 
     }
 

@@ -18,19 +18,24 @@ public class TriangleCloneInitiator : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        transformClass = Instantiate(triangle);
+        //initialise clone array
+        triangleClone = new IGB283Transform[triangleNum];
+        //create clone of triangle
+
         
         for (int i = 0; i < triangleNum; i++)
         {
+
+            transformClass = Instantiate(triangle);
             // creates instance of triangle in triangleClone[i]
-            triangleClone[i] = triangle.GetComponent<IGB283Transform>();
+            triangleClone[i] = transformClass.GetComponent<IGB283Transform>();
             triangleClone[i].speed = cloneSpeedInitial;
             triangleClone[i].angle = cloneAngleInitial;
 
+            // draws clone triangle
             triangleClone[i].DrawTriangle();
-            triangleClone[i].Start();
 
-            Instantiate(triangleClone[i]);
+            //increases speed and angle for next clone
             cloneSpeedInitial += cloneSpeedInterval;
             cloneAngleInitial += cloneAngelInterval;
         }
