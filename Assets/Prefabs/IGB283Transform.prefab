@@ -53,9 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angle: 10
   speed: -10
-  maxSpeed: 10
   speedIncrement: 1
-  verticalPos: 0
   moveX: 1
   moveY: 0
   maxX: 5

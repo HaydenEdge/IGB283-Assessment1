@@ -7,9 +7,7 @@ public class IGB283Transform : MonoBehaviour {
 
     public float angle;
     public float speed;
-	public float maxSpeed = 10.0f;
-	public float speedIncrement = 3.0f;
-    public float verticalPos;
+	public float speedIncrement = 1.0f;
 	public bool moveX = true;
 	public bool moveY = false;
 
@@ -102,21 +100,6 @@ public class IGB283Transform : MonoBehaviour {
         
 		//check if triangle has hit a boundry
         speed = speed * BoundryCollision(position);
-
-		// Speed up or slow down on mouse clicks
-		if (Input.GetMouseButtonDown (0) && (speed < maxSpeed) && (speed > -maxSpeed)) {
-			if (speed >= 0) {
-				speed = speed + (speedIncrement);
-			} else if (speed < 0) {
-				speed = speed - (speedIncrement);
-			}
-		} else if (Input.GetMouseButtonDown (1) && (speed != 0)) {
-			if (speed > 0) {
-				speed = speed - (speedIncrement);
-			} else if (speed < 0) {
-				speed = speed + (speedIncrement);
-			}
-		}
 
 		// Change x-axis position
 		if (moveX == true) {

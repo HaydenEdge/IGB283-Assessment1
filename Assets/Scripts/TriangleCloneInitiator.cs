@@ -5,10 +5,13 @@ using UnityEngine;
 public class TriangleCloneInitiator : MonoBehaviour {
 
     public int triangleNum;
+	public float maxSpeed = 20.0f;
+	public int yPos = -2;
+	public int yPosInterval = 4;
     public float cloneSpeedInitial;
     public float cloneSpeedInterval;
     public float cloneAngleInitial;
-    public float cloneAngelInterval;
+    public float cloneAngleInterval;
     public GameObject triangle;
 	public Material material;
 
@@ -27,7 +30,8 @@ public class TriangleCloneInitiator : MonoBehaviour {
         for (int i = 0; i < triangleNum; i++)
         {
 
-            transformClass = Instantiate(triangle);
+			transformClass = Instantiate(triangle, new Vector3(0, yPos, 0), Quaternion.identity);
+			yPos += yPosInterval;
 			newMaterial = Instantiate (material);
 
             // creates instance of triangle in triangleClone[i]
@@ -40,8 +44,10 @@ public class TriangleCloneInitiator : MonoBehaviour {
             triangleClone[i].DrawTriangle();
 
             //increases speed and angle for next clone
-            cloneSpeedInitial += cloneSpeedInterval;
-            cloneAngleInitial += cloneAngelInterval;
+			if ((cloneSpeedInitial + cloneSpeedInterval) <= maxSpeed) {
+				cloneSpeedInitial += cloneSpeedInterval;
+			}
+            cloneAngleInitial += cloneAngleInterval;
         }
     }
 
@@ -53,12 +59,24 @@ public class TriangleCloneInitiator : MonoBehaviour {
         for (int i = 0; i < triangleNum; i++)
         {
             triangleClone[i].Update();
+
+			// Speed up or slow down on mouse clicks
+			if (Input.GetMouseButtonDown (0) && (triangleClone[i].speed < maxSpeed) && (triangleClone[i].speed > -maxSpeed)) {
+				if (triangleClone[i].speed >= 0) {
+					triangleClone[i].speed = triangleClone[i].speed + (triangleClone[i].speedIncrement);
+				} else if (triangleClone[i].speed < 0) {
+					triangleClone[i].speed = triangleClone[i].speed - (triangleClone[i].speedIncrement);
+				}
+			} else if (Input.GetMouseButtonDown (1) && (triangleClone[i].speed != 0)) {
+				if (triangleClone[i].speed > 0) {
+					triangleClone[i].speed = triangleClone[i].speed - (triangleClone[i].speedIncrement);
+				} else if (triangleClone[i].speed < 0) {
+					triangleClone[i].speed = triangleClone[i].speed + (triangleClone[i].speedIncrement);
+				}
+			}
+
         }
 	}
-
-
-        // Instantiate clone instance
-
 
 
 }
