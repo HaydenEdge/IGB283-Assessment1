@@ -8,16 +8,20 @@ public class IGB283Transform : MonoBehaviour {
     public float angle;
     public float speed;
 	public float maxSpeed = 10.0f;
-	private float minSpeed = -10.0f;
 	public float speedIncrement = 3.0f;
     public float verticalPos;
 	public bool moveX = true;
 	public bool moveY = false;
+	public int maxX = 5;
+	public int minX = -5;
+	private float red = 1.0f;
+	private float green = 1.0f;
+	private float blue = 1.0f;
 
 	private Vector3 offset;
     private Mesh mesh;
-    private Material material;
-
+    
+	public Material material;
     public GameObject triangle;
 
 
@@ -50,6 +54,17 @@ public class IGB283Transform : MonoBehaviour {
             vertices[i] = M.MultiplyPoint(vertices[i]);
         }
 
+		// Update the colours based on position
+		red = (maxX / maxX) - (this.transform.position.x / maxX);
+		green = (maxX / maxX) - (this.transform.position.x / minX);
+		blue = (maxX / maxX) - (this.transform.position.x / maxX);
+
+		mesh.colors = new Color[] {
+			new Color (red, green, blue),
+			new Color (red, green, blue),
+			new Color (red, green, blue),
+		};
+
         // Set the vertices in the mesh to their new position
         mesh.vertices = vertices;
 
@@ -76,13 +91,6 @@ public class IGB283Transform : MonoBehaviour {
 
         };
 
-        mesh.colors = new Color[] {
-            new Color (0.8f, 0.3f, 1.0f),
-            new Color (0.8f, 0.3f, 1.0f),
-            new Color (0.8f, 0.3f, 1.0f),
-
-        };
-
         mesh.triangles = new int[] { 0, 1, 2 };
 
         offset.x = mesh.bounds.size.x / 2;
@@ -96,7 +104,7 @@ public class IGB283Transform : MonoBehaviour {
         speed = speed * BoundryCollision(position);
 
 		// Speed up or slow down on mouse clicks
-		if (Input.GetMouseButtonDown (0) && (speed < maxSpeed) && (speed > minSpeed)) {
+		if (Input.GetMouseButtonDown (0) && (speed < maxSpeed) && (speed > -maxSpeed)) {
 			if (speed >= 0) {
 				speed = speed + (speedIncrement);
 			} else if (speed < 0) {
@@ -156,10 +164,10 @@ public class IGB283Transform : MonoBehaviour {
     // check if triangle has reached outer boundries
     int BoundryCollision (Vector3 position)
     {
-        if (position.x >= 5)
+        if (position.x >= maxX)
         {
             return -1;
-        } else if (position.x <= -5)
+        } else if (position.x <= minX)
         {
             return -1;
         } else
