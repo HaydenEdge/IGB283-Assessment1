@@ -10,10 +10,11 @@ public class TriangleCloneInitiator : MonoBehaviour {
     public float cloneAngleInitial;
     public float cloneAngelInterval;
     public GameObject triangle;
+	public Material material;
 
     private IGB283Transform[] triangleClone;
     private GameObject transformClass;
-
+	private Material newMaterial;
 
     // Use this for initialization
     void Start () {
@@ -27,8 +28,11 @@ public class TriangleCloneInitiator : MonoBehaviour {
         {
 
             transformClass = Instantiate(triangle);
+			newMaterial = Instantiate (material);
+
             // creates instance of triangle in triangleClone[i]
             triangleClone[i] = transformClass.GetComponent<IGB283Transform>();
+			triangleClone[i].material = newMaterial;
             triangleClone[i].speed = cloneSpeedInitial;
             triangleClone[i].angle = cloneAngleInitial;
 

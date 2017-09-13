@@ -12,8 +12,10 @@ public class IGB283Transform : MonoBehaviour {
     public float verticalPos;
 	public bool moveX = true;
 	public bool moveY = false;
+
 	public int maxX = 5;
 	public int minX = -5;
+
 	private float red = 1.0f;
 	private float green = 1.0f;
 	private float blue = 1.0f;
@@ -22,15 +24,10 @@ public class IGB283Transform : MonoBehaviour {
     private Mesh mesh;
     
 	public Material material;
-    public GameObject triangle;
-
-
 
 
 	// Use this for initialization
-	public void Start () {
-
-        
+	public void Start () {  
 
     }
 
@@ -73,6 +70,7 @@ public class IGB283Transform : MonoBehaviour {
 
     }
 
+
     public void DrawTriangle()
     {
         gameObject.AddComponent<MeshFilter>();
@@ -96,6 +94,8 @@ public class IGB283Transform : MonoBehaviour {
         offset.x = mesh.bounds.size.x / 2;
         offset.y = mesh.bounds.size.y / 2;
     }
+
+
 	// Move the object (translation)
 	void Move() {
 		Vector3 position = this.transform.position;
@@ -131,6 +131,7 @@ public class IGB283Transform : MonoBehaviour {
 		this.transform.position = position;
 	}
 
+
     Matrix3x3 Rotate(float angle)
     {
         // Create a new matrix
@@ -146,7 +147,6 @@ public class IGB283Transform : MonoBehaviour {
     }
     
 
-
     Matrix3x3 Translate(Vector3 offset)
     {
         // Create a new matrix
@@ -161,17 +161,15 @@ public class IGB283Transform : MonoBehaviour {
         return matrix;
     }
 
+
     // check if triangle has reached outer boundries
     int BoundryCollision (Vector3 position)
     {
-        if (position.x >= maxX)
-        {
+        if (position.x >= maxX) {
             return -1;
-        } else if (position.x <= minX)
-        {
+		} else if (position.x <= minX) {
             return -1;
-        } else
-        {
+        } else {
             return 1;
         }
         
