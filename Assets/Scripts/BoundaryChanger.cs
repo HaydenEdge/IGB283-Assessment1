@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoundaryChanger : MonoBehaviour {
 
-	private bool isMoving = false;
+	public bool isMoving = false;
 
 	// Use this for initialization
 	void Start () {

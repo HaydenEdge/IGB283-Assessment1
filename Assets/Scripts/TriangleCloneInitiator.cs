@@ -42,6 +42,7 @@ public class TriangleCloneInitiator : MonoBehaviour {
 
             // Create instance of TRIANGLE in triangleClone[i]
             triangleClone[i] = transformClass.GetComponent<IGB283Transform>();
+			triangleClone [i].newY = yPos;
 			triangleClone[i].material = newMaterial;
             triangleClone[i].speed = cloneSpeedInitial;
             triangleClone[i].angle = cloneAngleInitial;
@@ -70,8 +71,8 @@ public class TriangleCloneInitiator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		// TRIANGLES - Speed up when pressing ] | down when pressing [
 		for (int i = 0; i < triangleNum; i++) {
+			// TRIANGLES - Speed up when pressing ] | down when pressing [
 			if (Input.GetKeyDown ("]") && (triangleClone[i].speed < maxSpeed) && (triangleClone[i].speed > -maxSpeed)) {
 				if (triangleClone[i].speed >= 0) {
 					triangleClone[i].speed = triangleClone[i].speed + (triangleClone[i].speedIncrement);
@@ -86,6 +87,10 @@ public class TriangleCloneInitiator : MonoBehaviour {
 				}
 			}
 
+			// TRIANGLES + BOUNDARY - Change Y-axis position of triangles when boundary moved
+			if (boundaryClone [i].isMoving == true) {
+				triangleClone [i].newY = boundaryClone [i].transform.position.y;
+			}
 		}
 
 	}

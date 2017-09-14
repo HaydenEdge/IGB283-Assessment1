@@ -10,6 +10,7 @@ public class IGB283Transform : MonoBehaviour {
 	public float speedIncrement = 3.0f;
 	public bool moveX = true;
 	public bool moveY = false;
+	public float newY;
 
 	public int maxX = 10;
 	public int minX = -10;
@@ -147,11 +148,8 @@ public class IGB283Transform : MonoBehaviour {
 		if (moveX == true) {
 			position.x += Time.deltaTime * speed;
 		}
-
-		// Change y-axis position
-		if (moveY == true) {
-			position.y += (Time.deltaTime * speed);
-		}
+			position.y = newY;
+			print ("Moving!");
 
 		this.transform.position = position;
 	}
