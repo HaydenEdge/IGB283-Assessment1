@@ -108,6 +108,23 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &330245141 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1370126541166684, guid: 0f9af14ff1305e840ab938bde1abc346,
+    type: 2}
+  m_PrefabInternal: {fileID: 970570475}
+--- !u!114 &330245142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 330245141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a4ce79dd5e4294ea0b07216c44465e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boundary: {fileID: 1370126541166684, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
 --- !u!1001 &517080522
 Prefab:
   m_ObjectHideFlags: 0
@@ -149,11 +166,62 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1488261159157346, guid: 5f05c4f3bdeea2b4abe0caa4a42e502d, type: 2}
       propertyPath: m_Name
-      value: Triangle1
+      value: TriangleSpawner
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114294830806331108, guid: 5f05c4f3bdeea2b4abe0caa4a42e502d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5f05c4f3bdeea2b4abe0caa4a42e502d, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &970570475
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4428064555242840, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.2500809
+      objectReference: {fileID: 0}
+    - target: {fileID: 4428064555242840, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.39097548
+      objectReference: {fileID: 0}
+    - target: {fileID: 4428064555242840, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4428064555242840, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4428064555242840, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4428064555242840, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4428064555242840, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4428064555242840, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370126541166684, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
+      propertyPath: m_Name
+      value: BoundrySpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370126541166684, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
+      propertyPath: m_TagString
+      value: Boundary
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114897223268900328, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1603722625 stripped
 GameObject:

@@ -12,8 +12,9 @@ public class IGB283Transform : MonoBehaviour {
     public float verticalPos;
 	public bool moveX = true;
 	public bool moveY = false;
-	public int maxX = 5;
-	public int minX = -5;
+	public int maxX = 10;
+	public int minX = -10;
+
 	private float red = 1.0f;
 	private float green = 1.0f;
 	private float blue = 1.0f;
@@ -164,6 +165,7 @@ public class IGB283Transform : MonoBehaviour {
     // check if triangle has reached outer boundries
     int BoundryCollision (Vector3 position)
     {
+        // inverts speed and thus direction if object hit minimum/maximum range
         if (position.x >= maxX)
         {
             return -1;

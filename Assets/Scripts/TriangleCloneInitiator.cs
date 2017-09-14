@@ -45,11 +45,7 @@ public class TriangleCloneInitiator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        // updates cloned triangles
-        for (int i = 0; i < triangleNum; i++)
-        {
-            triangleClone[i].Update();
-        }
+
 	}
 
 
