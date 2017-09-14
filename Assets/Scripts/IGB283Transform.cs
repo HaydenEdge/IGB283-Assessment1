@@ -149,7 +149,6 @@ public class IGB283Transform : MonoBehaviour {
 			position.x += Time.deltaTime * speed;
 		}
 			position.y = newY;
-			print ("Moving!");
 
 		this.transform.position = position;
 	}

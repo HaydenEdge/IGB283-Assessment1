@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114897223268900328}
   m_Layer: 0
   m_Name: Boundary
-  m_TagString: Untagged
+  m_TagString: BoundaryMover
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98d0bf49af92d5d448ba1dcb70044b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boundary: {fileID: 0}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   color: {r: 1, g: 1, b: 1, a: 1}
+  xpos: 6
+  yoffset: 0
+  isMoving: 0

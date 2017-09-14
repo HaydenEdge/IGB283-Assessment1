@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Boundary.cs" />
-     <Compile Include="Assets\Scripts\BoundaryChanger.cs" />
      <Compile Include="Assets\Scripts\IGB283Transform.cs" />
      <Compile Include="Assets\Scripts\Matrix3x3.cs" />
      <Compile Include="Assets\Scripts\TriangleCloneInitiator.cs" />

@@ -8,8 +8,9 @@ public class TriangleCloneInitiator : MonoBehaviour {
 	public float maxSpeed = 20.0f;
 	public float yPos = -4.0f;
 	public float yPosInterval = 5.0f;
-	private float boundaryYAdjust = 1.5f;
-	private float maxAdjust = 4.0f;
+	private float boundaryYAdjust = 0.5f;
+	private float boundaryXAdjust = -4.0f;
+	private float boundaryminXAdjust = -0.5f;
     public float cloneSpeedInitial;
     public float cloneSpeedInterval;
     public float cloneAngleInitial;
@@ -18,7 +19,7 @@ public class TriangleCloneInitiator : MonoBehaviour {
 	public GameObject boundary;
 	public Material material;
 
-	private BoundaryChanger[] boundaryClone;
+	private Boundary[] boundaryClone;
     private IGB283Transform[] triangleClone;
     private GameObject transformClass;
 	private GameObject boundaryClass;
@@ -32,7 +33,7 @@ public class TriangleCloneInitiator : MonoBehaviour {
         triangleClone = new IGB283Transform[triangleNum];
 
 		// BOUNDARY - Initialise clone array
-		boundaryClone = new BoundaryChanger[triangleNum * 2];
+		boundaryClone = new Boundary[triangleNum * 2];
         
 		// TRIANGLES + BOUNDARY - Create clone        
         for (int i = 0; i < triangleNum; i++) {
@@ -49,17 +50,17 @@ public class TriangleCloneInitiator : MonoBehaviour {
             triangleClone[i].angle = cloneAngleInitial;
 
 			// Initialise maxBOUNDARY
-			boundaryClass = Instantiate (boundary, new Vector3 (triangleClone[i].maxX + maxAdjust, yPos+boundaryYAdjust, 0.0f), Quaternion.identity);
+			boundaryClass = Instantiate (boundary, new Vector3 (triangleClone[i].maxX + boundaryXAdjust, yPos + boundaryYAdjust, 0.0f), Quaternion.identity);
 
 			// Create instance of maxBOUNDARY in boundaryClone[i]
-			boundaryClone[i] = boundaryClass.GetComponent<BoundaryChanger>();
+			boundaryClone[i] = boundaryClass.GetComponent<Boundary>();
 			boundaryClone[i].name = (i.ToString());
 
 			// Initialise minBOUNDARY
-			boundaryClass = Instantiate (boundary, new Vector3 (triangleClone[i].minX, yPos+boundaryYAdjust, 0.0f), Quaternion.identity);
+			boundaryClass = Instantiate (boundary, new Vector3 (triangleClone[i].minX + boundaryXAdjust + boundaryminXAdjust, yPos + boundaryYAdjust, 0.0f), Quaternion.identity);
 
 			// Create instance of minBOUNDARY in boundaryClone[i]
-			boundaryClone[i + triangleNum] = boundaryClass.GetComponent<BoundaryChanger>();
+			boundaryClone[i + triangleNum] = boundaryClass.GetComponent<Boundary>();
 			boundaryClone[i + triangleNum].name = (i.ToString());
 
 

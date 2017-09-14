@@ -8,29 +8,29 @@ public class Boundary : MonoBehaviour {
     public Material material;
     public Color color = Color.white;
     public float xpos = 6;
-
     public float yoffset = 0.0f;
-    public bool isMoving = true;
+	private int boundaryWidth = 2;
+    public bool isMoving = false;
     private Mesh mesh;
     private Vector2[] meshboudries = new Vector2[3];
     private Vector3[] meshorigin = new Vector3[3];
 
 
-
-
     // Use this for initialization
     public void Start() {
         DrawBoundary(xpos, 0, 0.5f, 2, 0);
+
     }
+
 
     // Update is called once per frame
     void Update() {
         meshorigin = mesh.vertices;
-        meshboudries = ArrayToVector2(mesh.vertices);
-        //MouseOverAction();
-        MouseClick();
+        MouseClickAction();
+		MoveVertical ();
 
     }
+
 
     void DrawBoundary(float x, float y, float width, float height, float z)
     {
@@ -52,68 +52,49 @@ public class Boundary : MonoBehaviour {
         };
 
         mesh.triangles = new int[] { 0, 1, 2, 0, 2, 3 };
-        
 
+		gameObject.AddComponent<BoxCollider2D>();
 
     }
+
 
     void MoveVertical()
     {
         Vector2 position = this.transform.position;
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        yoffset = mousePosition.y;
-
-        position.y = yoffset;
-        this.transform.position = position;
-
-    }
-
-    void MouseOverAction()
-    {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Collider2D hitCollider = Physics2D.OverlapPoint(mousePosition);
-
-        hitCollider.GetComponent<PolygonCollider2D>().points = meshboudries;
-
-        if (hitCollider && hitCollider.transform.tag == "Boundary")
-        {
-            isMoving = true;
-
-        } else
-        {
-            isMoving = false;
-        }
-
+		if (isMoving == true) {
+			yoffset = mousePosition.y - (2 / boundaryWidth);
+			position.y = yoffset;
+			this.transform.position = position;
+		}
 
     }
 
-    void MouseClick()
-    {
+
+    void MouseOverAction() {
+		Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		Collider2D hitCollider = Physics2D.OverlapPoint (mousePosition);
+
+		if (hitCollider && hitCollider.name == this.name) {
+			isMoving = true;
+		}
+
+    }
+
+
+    void MouseClickAction() {
         if (Input.GetMouseButton(0)) {
-
-            MoveVertical();
-        } else if (Input.GetMouseButtonUp(0))
-        {
+			MouseOverAction ();
+        } else if (Input.GetMouseButtonUp(0)) {
             isMoving = false;
         }
     }
 
-    Vector2 ToVector2(Vector3 v3)
-    {
+
+    Vector2 ToVector2(Vector3 v3) {
         return new Vector2(v3.x, v3.y);
     }
 
-    Vector2[] ArrayToVector2(Vector3[] v3)
-    {
-        int length = v3.Length;
-        Vector2[] newArray = new Vector2[length];
-
-        for (int i = 0; i <= length; i++)
-        {
-            newArray[i] = ToVector2(v3[i]);
-        }
-        return newArray;
-    }
 
 }
