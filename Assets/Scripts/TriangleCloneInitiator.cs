@@ -9,6 +9,7 @@ public class TriangleCloneInitiator : MonoBehaviour {
 	public float yPos = -4.0f;
 	public float yPosInterval = 5.0f;
 	private float boundaryYAdjust = 1.5f;
+	private float maxAdjust = 4.0f;
     public float cloneSpeedInitial;
     public float cloneSpeedInterval;
     public float cloneAngleInitial;
@@ -31,7 +32,7 @@ public class TriangleCloneInitiator : MonoBehaviour {
         triangleClone = new IGB283Transform[triangleNum];
 
 		// BOUNDARY - Initialise clone array
-		boundaryClone = new BoundaryChanger[triangleNum];
+		boundaryClone = new BoundaryChanger[triangleNum * 2];
         
 		// TRIANGLES + BOUNDARY - Create clone        
         for (int i = 0; i < triangleNum; i++) {
@@ -42,17 +43,25 @@ public class TriangleCloneInitiator : MonoBehaviour {
 
             // Create instance of TRIANGLE in triangleClone[i]
             triangleClone[i] = transformClass.GetComponent<IGB283Transform>();
-			triangleClone [i].newY = yPos;
+			triangleClone[i].newY = yPos;
 			triangleClone[i].material = newMaterial;
             triangleClone[i].speed = cloneSpeedInitial;
             triangleClone[i].angle = cloneAngleInitial;
 
-			// Initialise BOUNDARY
-			boundaryClass = Instantiate (boundary, new Vector3 (triangleClone[i].maxX, yPos+boundaryYAdjust, 0.0f), Quaternion.identity);
+			// Initialise maxBOUNDARY
+			boundaryClass = Instantiate (boundary, new Vector3 (triangleClone[i].maxX + maxAdjust, yPos+boundaryYAdjust, 0.0f), Quaternion.identity);
+
+			// Create instance of maxBOUNDARY in boundaryClone[i]
+			boundaryClone[i] = boundaryClass.GetComponent<BoundaryChanger>();
+			boundaryClone[i].name = (i.ToString());
+
+			// Initialise minBOUNDARY
 			boundaryClass = Instantiate (boundary, new Vector3 (triangleClone[i].minX, yPos+boundaryYAdjust, 0.0f), Quaternion.identity);
 
-			// Create instance of BOUNDARY in boundaryClone[i]
-			boundaryClone[i] = boundaryClass.GetComponent<BoundaryChanger>();
+			// Create instance of minBOUNDARY in boundaryClone[i]
+			boundaryClone[i + triangleNum] = boundaryClass.GetComponent<BoundaryChanger>();
+			boundaryClone[i + triangleNum].name = (i.ToString());
+
 
             // Draw clone TRIANGLE
             triangleClone[i].DrawTriangle();
@@ -89,7 +98,7 @@ public class TriangleCloneInitiator : MonoBehaviour {
 
 			// TRIANGLES + BOUNDARY - Change Y-axis position of triangles when boundary moved
 			if (boundaryClone [i].isMoving == true) {
-				triangleClone [i].newY = boundaryClone [i].transform.position.y;
+				triangleClone [i].newY = boundaryClone [i].transform.position.y - boundaryYAdjust;
 			}
 		}
 

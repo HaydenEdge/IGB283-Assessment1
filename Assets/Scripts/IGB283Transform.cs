@@ -12,8 +12,8 @@ public class IGB283Transform : MonoBehaviour {
 	public bool moveY = false;
 	public float newY;
 
-	public int maxX = 10;
-	public int minX = -10;
+	public int maxX = 5;
+	public int minX = -9;
 
 	private float red = 1.0f;
 	private float green = 1.0f;
