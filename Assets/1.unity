@@ -245,8 +245,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triangleNum: 2
   maxSpeed: 20
-  yPos: -2
-  yPosInterval: 4
+  yPos: -4
+  yPosInterval: 5
   cloneSpeedInitial: 3
   cloneSpeedInterval: 5
   cloneAngleInitial: 5

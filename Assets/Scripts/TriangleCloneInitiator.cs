@@ -6,8 +6,8 @@ public class TriangleCloneInitiator : MonoBehaviour {
 
     public int triangleNum;
 	public float maxSpeed = 20.0f;
-	public int yPos = -2;
-	public int yPosInterval = 4;
+	public int yPos = -4;
+	public int yPosInterval = 5;
     public float cloneSpeedInitial;
     public float cloneSpeedInterval;
     public float cloneAngleInitial;

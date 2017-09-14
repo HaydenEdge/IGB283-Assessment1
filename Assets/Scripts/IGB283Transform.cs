@@ -82,11 +82,50 @@ public class IGB283Transform : MonoBehaviour {
         mesh.vertices = new Vector3[] {
             new Vector3 (0, 0, 0),
             new Vector3 (0, 1, 0),
-            new Vector3 (1, 1, 0),
+			new Vector3 (0, 2, 0),
+			new Vector3 (0, 3, 0),
+
+			new Vector3 (1, 1, 0),
+			new Vector3 (1, 2, 0),
+
+			new Vector3 (2, 0, 0),
+			new Vector3 (2, 1, 0),
+			new Vector3 (2, 2, 0),
+			new Vector3 (2, 3, 0),
+
+			new Vector3 (3, 1, 0),
+			new Vector3 (3, 2, 0),
+
+			new Vector3 (4, 0, 0),
+			new Vector3 (4, 1, 0),
+			new Vector3 (4, 2, 0),
+			new Vector3 (4, 3, 0),
 
         };
 
-        mesh.triangles = new int[] { 0, 1, 2 };
+        mesh.triangles = new int[] {
+			0, 1, 4,
+			1, 2, 5,
+			1, 4, 5,
+			2, 3, 5,
+
+			4, 5, 8,
+			4, 7, 8,
+
+			4, 6, 7,
+			5, 8, 9,
+
+			6, 7, 10,
+			7, 8, 11,
+			7, 10, 11,
+			9, 8, 11,
+
+			11, 15, 14,
+			10, 11, 14,
+			10, 13, 14,
+			10, 13, 12
+
+		};
 
         offset.x = mesh.bounds.size.x / 2;
         offset.y = mesh.bounds.size.y / 2;

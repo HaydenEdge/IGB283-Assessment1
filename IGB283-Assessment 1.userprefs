@@ -2,7 +2,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TriangleCloneInitiator.cs">
     <Files>
-      <File FileName="Assets\Scripts\IGB283Transform.cs" Line="129" Column="2" />
+      <File FileName="Assets\Scripts\IGB283Transform.cs" Line="107" Column="12" />
       <File FileName="Assets\Scripts\TriangleCloneInitiator.cs" Line="17" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
