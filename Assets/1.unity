@@ -121,10 +121,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 330245141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9a4ce79dd5e4294ea0b07216c44465e, type: 3}
+  m_Script: {fileID: 11500000, guid: 98d0bf49af92d5d448ba1dcb70044b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boundary: {fileID: 1370126541166684, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
+  material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  xpos: 6
+  yoffset: 0
+  isMoving: 0
 --- !u!1001 &517080522
 Prefab:
   m_ObjectHideFlags: 0
