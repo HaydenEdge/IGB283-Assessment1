@@ -7,11 +7,10 @@ public class IGB283Transform : MonoBehaviour {
 
     public float angle;
     public float speed;
-	public float maxSpeed = 10.0f;
 	public float speedIncrement = 3.0f;
-    public float verticalPos;
 	public bool moveX = true;
 	public bool moveY = false;
+
 	public int maxX = 10;
 	public int minX = -10;
 
@@ -23,15 +22,10 @@ public class IGB283Transform : MonoBehaviour {
     private Mesh mesh;
     
 	public Material material;
-    public GameObject triangle;
-
-
 
 
 	// Use this for initialization
-	public void Start () {
-
-        
+	public void Start () {        
 
     }
 
@@ -104,21 +98,6 @@ public class IGB283Transform : MonoBehaviour {
 		//check if triangle has hit a boundry
         speed = speed * BoundryCollision(position);
 
-		// Speed up or slow down on mouse clicks
-		if (Input.GetMouseButtonDown (0) && (speed < maxSpeed) && (speed > -maxSpeed)) {
-			if (speed >= 0) {
-				speed = speed + (speedIncrement);
-			} else if (speed < 0) {
-				speed = speed - (speedIncrement);
-			}
-		} else if (Input.GetMouseButtonDown (1) && (speed != 0)) {
-			if (speed > 0) {
-				speed = speed - (speedIncrement);
-			} else if (speed < 0) {
-				speed = speed + (speedIncrement);
-			}
-		}
-
 		// Change x-axis position
 		if (moveX == true) {
 			position.x += Time.deltaTime * speed;
@@ -163,17 +142,13 @@ public class IGB283Transform : MonoBehaviour {
     }
 
     // check if triangle has reached outer boundries
-    int BoundryCollision (Vector3 position)
-    {
+    int BoundryCollision (Vector3 position) {
         // inverts speed and thus direction if object hit minimum/maximum range
-        if (position.x >= maxX)
-        {
+        if (position.x >= maxX) {
             return -1;
-        } else if (position.x <= minX)
-        {
+        } else if (position.x <= minX) {
             return -1;
-        } else
-        {
+        } else {
             return 1;
         }
         
