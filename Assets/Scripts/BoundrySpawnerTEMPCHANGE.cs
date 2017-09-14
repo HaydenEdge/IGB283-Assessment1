@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoundrySpawner : MonoBehaviour {
+public class BoundrySpawnerTEMPCHANGE : MonoBehaviour {
 
     
 

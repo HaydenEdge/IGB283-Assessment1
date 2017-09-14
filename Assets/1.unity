@@ -113,7 +113,7 @@ GameObject:
   m_PrefabParentObject: {fileID: 1370126541166684, guid: 0f9af14ff1305e840ab938bde1abc346,
     type: 2}
   m_PrefabInternal: {fileID: 970570475}
---- !u!114 &330245142
+--- !u!114 &330245143
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -121,14 +121,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 330245141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98d0bf49af92d5d448ba1dcb70044b32, type: 3}
+  m_Script: {fileID: 11500000, guid: 34b682ba9e627254b94b766a5b391962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  color: {r: 1, g: 1, b: 1, a: 1}
-  xpos: 6
-  yoffset: 0
-  isMoving: 0
+  boundaryNum: 2
+  yPos: -4
+  yPosInterval: 5
+  boundary: {fileID: 1807523613392232, guid: ee1a60f33e5b25d46b102e4f4166c153, type: 2}
 --- !u!1001 &517080522
 Prefab:
   m_ObjectHideFlags: 0
@@ -185,11 +184,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4428064555242840, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.2500809
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4428064555242840, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.39097548
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4428064555242840, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
       propertyPath: m_LocalPosition.z
@@ -217,11 +216,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1370126541166684, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
       propertyPath: m_Name
-      value: BoundrySpawner
+      value: BoundarySpawner
       objectReference: {fileID: 0}
     - target: {fileID: 1370126541166684, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
       propertyPath: m_TagString
-      value: Boundary
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370126541166684, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114897223268900328, guid: 0f9af14ff1305e840ab938bde1abc346, type: 2}
@@ -252,6 +255,7 @@ MonoBehaviour:
   cloneAngleInitial: 5
   cloneAngleInterval: 3
   triangle: {fileID: 1488261159157346, guid: 5f05c4f3bdeea2b4abe0caa4a42e502d, type: 2}
+  boundary: {fileID: 1807523613392232, guid: ee1a60f33e5b25d46b102e4f4166c153, type: 2}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &1828847715
 GameObject:

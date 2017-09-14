@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class IGB283Transform : MonoBehaviour {
 
-    public float angle;
+	public float angle;
     public float speed;
 	public float speedIncrement = 3.0f;
 	public bool moveX = true;
@@ -17,6 +17,7 @@ public class IGB283Transform : MonoBehaviour {
 	private float red = 1.0f;
 	private float green = 1.0f;
 	private float blue = 1.0f;
+	private Color changingColor;
 
 	private Vector3 offset;
     private Mesh mesh;
@@ -25,8 +26,8 @@ public class IGB283Transform : MonoBehaviour {
 
 
 	// Use this for initialization
-	public void Start () {        
-
+	public void Start () {   
+		
     }
 
 
@@ -58,6 +59,19 @@ public class IGB283Transform : MonoBehaviour {
 			new Color (red, green, blue),
 			new Color (red, green, blue),
 			new Color (red, green, blue),
+			new Color (red, green, blue),
+			new Color (red, green, blue),
+			new Color (red, green, blue),
+			new Color (red, green, blue),
+			new Color (red, green, blue),
+			new Color (red, green, blue),
+			new Color (red, green, blue),
+			new Color (red, green, blue),
+			new Color (red, green, blue),
+			new Color (red, green, blue),
+			new Color (red, green, blue),
+			new Color (red, green, blue),
+			new Color (red, green, blue)
 		};
 
         // Set the vertices in the mesh to their new position
@@ -84,23 +98,18 @@ public class IGB283Transform : MonoBehaviour {
             new Vector3 (0, 1, 0),
 			new Vector3 (0, 2, 0),
 			new Vector3 (0, 3, 0),
-
 			new Vector3 (1, 1, 0),
 			new Vector3 (1, 2, 0),
-
 			new Vector3 (2, 0, 0),
 			new Vector3 (2, 1, 0),
 			new Vector3 (2, 2, 0),
 			new Vector3 (2, 3, 0),
-
 			new Vector3 (3, 1, 0),
 			new Vector3 (3, 2, 0),
-
 			new Vector3 (4, 0, 0),
 			new Vector3 (4, 1, 0),
 			new Vector3 (4, 2, 0),
-			new Vector3 (4, 3, 0),
-
+			new Vector3 (4, 3, 0)
         };
 
         mesh.triangles = new int[] {
@@ -108,28 +117,25 @@ public class IGB283Transform : MonoBehaviour {
 			1, 2, 5,
 			1, 4, 5,
 			2, 3, 5,
-
 			4, 5, 8,
 			4, 7, 8,
-
 			4, 6, 7,
 			5, 8, 9,
-
 			6, 7, 10,
 			7, 8, 11,
 			7, 10, 11,
 			9, 8, 11,
-
 			11, 15, 14,
 			10, 11, 14,
 			10, 13, 14,
 			10, 13, 12
-
 		};
 
         offset.x = mesh.bounds.size.x / 2;
         offset.y = mesh.bounds.size.y / 2;
     }
+
+
 	// Move the object (translation)
 	void Move() {
 		Vector3 position = this.transform.position;
@@ -150,6 +156,7 @@ public class IGB283Transform : MonoBehaviour {
 		this.transform.position = position;
 	}
 
+
     Matrix3x3 Rotate(float angle)
     {
         // Create a new matrix
@@ -164,7 +171,6 @@ public class IGB283Transform : MonoBehaviour {
         return matrix;
     }
     
-
 
     Matrix3x3 Translate(Vector3 offset)
     {
