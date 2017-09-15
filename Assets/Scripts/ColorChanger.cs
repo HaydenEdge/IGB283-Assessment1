@@ -60,12 +60,13 @@ public class ColorChanger : MonoBehaviour {
 	}
 
 
-	// Determine if the mouse is over the object and activate it
+	// Determine if the mouse is over the object
 	void MouseLeftAction() {
 		Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Collider2D hitCollider = Physics2D.OverlapPoint (mousePosition);
 
-		// If this object is selected, activate it
+		// If this object is selected, change 'active' to true
+		// 'active' is read elsewhere to allow the buttons to affect colour changes
 		if (hitCollider && hitCollider.name == this.name) {
 			isActive = true;
 		}
@@ -73,12 +74,12 @@ public class ColorChanger : MonoBehaviour {
 	}
 
 
-	// Determine if the mouse is over the object and activate it
+	// Determine if the mouse is over the object
 	void MouseRightAction() {
 		Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Collider2D hitCollider = Physics2D.OverlapPoint (mousePosition);
 
-		// If this object is selected, deactivate it
+		// If this object is selected, change 'active' to false
 		if (hitCollider && hitCollider.name == this.name) {
 			isActive = false;
 		}
