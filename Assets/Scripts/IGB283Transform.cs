@@ -33,7 +33,10 @@ public class IGB283Transform : MonoBehaviour {
 
 	// Use this for initialization
 	public void Start () {   
+
+		// Define totalLength based on range of movement for objects
 		totalLength = maxX - minX;
+
     }
 
 
@@ -57,9 +60,11 @@ public class IGB283Transform : MonoBehaviour {
         }
 
 		// Update the colours based on position
+		// Define relevant variables
 		rightMain = ((this.transform.position.x - minX) / totalLength);
 		leftMain = 1.0f - ((this.transform.position.x - minX) / totalLength);
 
+		// Reverse color calculations for each of the three colors if necessary
 		if (redLeft == true) {
 			red = leftMain;
 		} else if (redLeft == false) {
@@ -78,10 +83,7 @@ public class IGB283Transform : MonoBehaviour {
 			blue = rightMain;
 		}
 
-
-
-		// ((this.transform.position.x - minX) / totalLength)
-
+		// Set the colors to the mesh
 		mesh.colors = new Color[] {
 			new Color (red, green, blue),
 			new Color (red, green, blue),
@@ -109,17 +111,24 @@ public class IGB283Transform : MonoBehaviour {
 
     }
 
-    public void DrawTriangle()
-    {
-        gameObject.AddComponent<MeshFilter>();
+
+	// Draw the moving objects/triangles
+    public void DrawTriangle() {
+
+		// Add a MeshFilter and MeshRenderer to the empty GameObject
+		gameObject.AddComponent<MeshFilter>();
         gameObject.AddComponent<MeshRenderer>();
 
+		// Get the Mesh from the MeshFilter
         mesh = GetComponent<MeshFilter>().mesh;
 
+		// Set the material to the selected material
         GetComponent<MeshRenderer>().material = material;
 
+		// Clear all vertex and index data from the mesh
         mesh.Clear();
 
+		// Create necessary points
         mesh.vertices = new Vector3[] {
             new Vector3 (0, 0, 0),
             new Vector3 (0, 1, 0),
@@ -139,6 +148,7 @@ public class IGB283Transform : MonoBehaviour {
 			new Vector3 (4, 3, 0)
         };
 
+		// Set vertex indices to create triangles
         mesh.triangles = new int[] {
 			0, 1, 4,
 			1, 2, 5,
@@ -158,6 +168,7 @@ public class IGB283Transform : MonoBehaviour {
 			10, 13, 12
 		};
 
+		// Allow object to rotate around mesh center
         offset.x = mesh.bounds.size.x / 2;
         offset.y = mesh.bounds.size.y / 2;
     }
@@ -165,21 +176,27 @@ public class IGB283Transform : MonoBehaviour {
 
 	// Move the object (translation)
 	void Move() {
+
+		// Get current position
 		Vector3 position = this.transform.position;
         
-		//check if triangle has hit a boundry
+		// Check if triangle has hit a boundary
         speed = speed * BoundryCollision(position);
 
 		// Change x-axis position
 		if (moveX == true) {
 			position.x += Time.deltaTime * speed;
 		}
-			position.y = newY;
 
+		// Change y-axis position
+		position.y = newY;
+
+		// Apply new position
 		this.transform.position = position;
 	}
 
 
+	// Create the rotation function
     Matrix3x3 Rotate(float angle)
     {
         // Create a new matrix
@@ -195,6 +212,7 @@ public class IGB283Transform : MonoBehaviour {
     }
     
 
+	// Create the translation function
     Matrix3x3 Translate(Vector3 offset)
     {
         // Create a new matrix
@@ -209,9 +227,10 @@ public class IGB283Transform : MonoBehaviour {
         return matrix;
     }
 
-    // check if triangle has reached outer boundries
+
+    // Check if triangle has reached outer boundries
     int BoundryCollision (Vector3 position) {
-        // inverts speed and thus direction if object hit minimum/maximum range
+        // Inverts speed and thus direction of object if hit minimum/maximum range
         if (position.x >= maxX) {
             return -1;
         } else if (position.x <= minX) {

@@ -47,7 +47,7 @@ public class TriangleCloneInitiator : MonoBehaviour {
 		// TRIANGLES + BOUNDARY - Create clone        
         for (int i = 0; i < triangleNum; i++) {
 
-			// Initialise TRIANGLE
+			// Initialise TRIANGLE + material
 			transformClass = Instantiate(triangle, new Vector3(0.0f, yPos, 0.0f), Quaternion.identity);
 			newMaterial = Instantiate(material);
 
@@ -72,7 +72,6 @@ public class TriangleCloneInitiator : MonoBehaviour {
 			boundaryClone[i + triangleNum] = boundaryClass.GetComponent<Boundary>();
 			boundaryClone[i + triangleNum].name = (i.ToString());
 
-
             // Draw clone TRIANGLE
             triangleClone[i].DrawTriangle();
 
@@ -80,21 +79,27 @@ public class TriangleCloneInitiator : MonoBehaviour {
 			if ((cloneSpeedInitial + cloneSpeedInterval) <= maxSpeed) {
 				cloneSpeedInitial += cloneSpeedInterval;
 			}
+
+			// Update variables that need to be increased
             cloneAngleInitial += cloneAngleInterval;
 			yPos += yPosInterval;
         }
-
-
+			
 		// COLOR CHANGER - Initialise clone array - one for each color
 		colorChangerObjectClone = new ColorChanger[colorChangerNum];
 
 		// COLOR CHANGER - Create clone        
 		for (int i = 0; i < colorChangerNum; i++) {
+
+			// Initialise Color Changer + material
 			colorChangerClass = Instantiate(colorChangerObject, new Vector3(colorXPos, -5.0f, 0.0f), Quaternion.identity);
 			newMaterial = Instantiate(material);
 
+			// Create instance of Color Changer in colorChangerObjectClone[i]
 			colorChangerObjectClone[i] = colorChangerClass.GetComponent<ColorChanger>();
 			colorChangerObjectClone[i].material = material;
+
+			// Name each instance
 			if (i == 0) {
 				colorChangerObjectClone [i].name = "Red";
 			} else if (i == 1) {
@@ -102,9 +107,10 @@ public class TriangleCloneInitiator : MonoBehaviour {
 			} else if (i == 2) {
 				colorChangerObjectClone [i].name = "Blue";
 			}
+
+			// Update variables that need to be increased
 			colorXPos += colorXPosInterval;
 		}
-
     }
 		
 	
@@ -112,13 +118,16 @@ public class TriangleCloneInitiator : MonoBehaviour {
 	void Update () {
 
 		for (int i = 0; i < triangleNum; i++) {
-			// TRIANGLES - Speed up when pressing ] | down when pressing [
+
+			// TRIANGLES - Speed up when pressing ]
 			if (Input.GetKeyDown ("]") && (triangleClone[i].speed < maxSpeed) && (triangleClone[i].speed > -maxSpeed)) {
 				if (triangleClone[i].speed >= 0) {
 					triangleClone[i].speed = triangleClone[i].speed + (triangleClone[i].speedIncrement);
 				} else if (triangleClone[i].speed < 0) {
 					triangleClone[i].speed = triangleClone[i].speed - (triangleClone[i].speedIncrement);
 				}
+			
+			// TRIANGLES - Slow down when pressing [
 			} else if (Input.GetKeyDown ("[") && (triangleClone[i].speed != 0)) {
 				if (triangleClone[i].speed > 0) {
 					triangleClone[i].speed = triangleClone[i].speed - (triangleClone[i].speedIncrement);
@@ -127,22 +136,24 @@ public class TriangleCloneInitiator : MonoBehaviour {
 				}
 			}
 
-			// TRIANGLES + BOUNDARY - Change Y-axis position of triangles when boundary moved
+			// TRIANGLES + BOUNDARY - Change Y-axis position of triangles when boundary is moved
 			if (boundaryClone [i].isMoving == true) {
 				triangleClone [i].newY = boundaryClone [i].transform.position.y - boundaryYAdjust;
 			}
 
-			// TRIANGLES + COLORCHANGER
+			// TRIANGLES + COLORCHANGER - For Red/Green/Blue send message to triangles to swap color calculation if needed
 			if (colorChangerObjectClone [0].isActive == true) {
 				triangleClone [i].redLeft = true;
 			} else {
 				triangleClone [i].redLeft = false;
 			}
+
 			if (colorChangerObjectClone [1].isActive == true) {
 				triangleClone [i].greenLeft = true;
 			} else {
 				triangleClone [i].greenLeft = false;
 			}
+
 			if (colorChangerObjectClone [2].isActive == true) {
 				triangleClone [i].blueLeft = true;
 			} else {

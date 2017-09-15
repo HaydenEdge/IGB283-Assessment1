@@ -2,9 +2,10 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TriangleCloneInitiator.cs">
     <Files>
-      <File FileName="Assets\Scripts\IGB283Transform.cs" Line="74" Column="3" />
-      <File FileName="Assets\Scripts\TriangleCloneInitiator.cs" Line="123" Column="38" />
-      <File FileName="Assets\Scripts\ColorChanger.cs" Line="83" Column="24" />
+      <File FileName="Assets\Scripts\Boundary.cs" Line="84" Column="46" />
+      <File FileName="Assets\Scripts\ColorChanger.cs" Line="77" Column="27" />
+      <File FileName="Assets\Scripts\IGB283Transform.cs" Line="14" Column="2" />
+      <File FileName="Assets\Scripts\TriangleCloneInitiator.cs" Line="15" Column="39" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
