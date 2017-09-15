@@ -12,13 +12,18 @@ public class IGB283Transform : MonoBehaviour {
 	public bool moveY = false;
 	public float newY;
 
-	public int maxX = 5;
-	public int minX = -9;
+	public float maxX = 5.0f;
+	public float minX = -9.0f;
+	private float totalLength;
 
 	private float red = 1.0f;
 	private float green = 1.0f;
 	private float blue = 1.0f;
-	private Color changingColor;
+	private float rightMain;
+	private float leftMain;
+	public bool redLeft;
+	public bool greenLeft;
+	public bool blueLeft;
 
 	private Vector3 offset;
     private Mesh mesh;
@@ -28,7 +33,7 @@ public class IGB283Transform : MonoBehaviour {
 
 	// Use this for initialization
 	public void Start () {   
-		
+		totalLength = maxX - minX;
     }
 
 
@@ -52,9 +57,30 @@ public class IGB283Transform : MonoBehaviour {
         }
 
 		// Update the colours based on position
-		red = (maxX / maxX) - (this.transform.position.x / maxX);
-		green = (maxX / maxX) - (this.transform.position.x / minX);
-		blue = (maxX / maxX) - (this.transform.position.x / maxX);
+		rightMain = ((this.transform.position.x - minX) / totalLength);
+		leftMain = 1.0f - ((this.transform.position.x - minX) / totalLength);
+
+		if (redLeft == true) {
+			red = leftMain;
+		} else if (redLeft == false) {
+			red = rightMain;
+		}
+
+		if (greenLeft == true) {
+			green = leftMain;
+		} else if (greenLeft == false) {
+			green = rightMain;
+		}
+
+		if (blueLeft == true) {
+			blue = leftMain;
+		} else if (blueLeft == false) {
+			blue = rightMain;
+		}
+
+
+
+		// ((this.transform.position.x - minX) / totalLength)
 
 		mesh.colors = new Color[] {
 			new Color (red, green, blue),

@@ -9,16 +9,16 @@ public class Boundary : MonoBehaviour {
     public Color color = Color.white;
     public float xpos = 6;
     public float yoffset = 0.0f;
-	private int boundaryWidth = 2;
+	private float boundaryWidth = 2.0f;
     public bool isMoving = false;
     private Mesh mesh;
-    private Vector2[] meshboudries = new Vector2[3];
+    private Vector2[] meshboundaries = new Vector2[3];
     private Vector3[] meshorigin = new Vector3[3];
 
 
     // Use this for initialization
     public void Start() {
-        DrawBoundary(xpos, 0, 0.5f, 2, 0);
+        DrawBoundary(xpos, 0, 0.5f, boundaryWidth, 0);
 
     }
 
@@ -64,7 +64,7 @@ public class Boundary : MonoBehaviour {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 		if (isMoving == true) {
-			yoffset = mousePosition.y - (2 / boundaryWidth);
+			yoffset = mousePosition.y - (boundaryWidth / 2);
 			position.y = yoffset;
 			this.transform.position = position;
 		}

@@ -5,24 +5,33 @@ using UnityEngine;
 public class TriangleCloneInitiator : MonoBehaviour {
 
     public int triangleNum = 2;
+	private int colorChangerNum = 3;
 	public float maxSpeed = 20.0f;
+
 	public float yPos = -4.0f;
 	public float yPosInterval = 5.0f;
+	private float colorXPos = 8.0f;
+	private float colorXPosInterval = 1.0f;
 	private float boundaryYAdjust = 0.5f;
 	private float boundaryXAdjust = -4.0f;
 	private float boundaryminXAdjust = -0.5f;
+
     public float cloneSpeedInitial;
     public float cloneSpeedInterval;
     public float cloneAngleInitial;
     public float cloneAngleInterval;
+
     public GameObject triangle;
 	public GameObject boundary;
+	public GameObject colorChangerObject;
 	public Material material;
 
+	private IGB283Transform[] triangleClone;
 	private Boundary[] boundaryClone;
-    private IGB283Transform[] triangleClone;
+	private ColorChanger[] colorChangerObjectClone;
     private GameObject transformClass;
 	private GameObject boundaryClass;
+	private GameObject colorChangerClass;
 	private Material newMaterial;
 
 
@@ -75,6 +84,27 @@ public class TriangleCloneInitiator : MonoBehaviour {
 			yPos += yPosInterval;
         }
 
+
+		// COLOR CHANGER - Initialise clone array - one for each color
+		colorChangerObjectClone = new ColorChanger[colorChangerNum];
+
+		// COLOR CHANGER - Create clone        
+		for (int i = 0; i < colorChangerNum; i++) {
+			colorChangerClass = Instantiate(colorChangerObject, new Vector3(colorXPos, -5.0f, 0.0f), Quaternion.identity);
+			newMaterial = Instantiate(material);
+
+			colorChangerObjectClone[i] = colorChangerClass.GetComponent<ColorChanger>();
+			colorChangerObjectClone[i].material = material;
+			if (i == 0) {
+				colorChangerObjectClone [i].name = "Red";
+			} else if (i == 1) {
+				colorChangerObjectClone [i].name = "Green";
+			} else if (i == 2) {
+				colorChangerObjectClone [i].name = "Blue";
+			}
+			colorXPos += colorXPosInterval;
+		}
+
     }
 		
 	
@@ -101,6 +131,24 @@ public class TriangleCloneInitiator : MonoBehaviour {
 			if (boundaryClone [i].isMoving == true) {
 				triangleClone [i].newY = boundaryClone [i].transform.position.y - boundaryYAdjust;
 			}
+
+			// TRIANGLES + COLORCHANGER
+			if (colorChangerObjectClone [0].isActive == true) {
+				triangleClone [i].redLeft = true;
+			} else {
+				triangleClone [i].redLeft = false;
+			}
+			if (colorChangerObjectClone [1].isActive == true) {
+				triangleClone [i].greenLeft = true;
+			} else {
+				triangleClone [i].greenLeft = false;
+			}
+			if (colorChangerObjectClone [2].isActive == true) {
+				triangleClone [i].blueLeft = true;
+			} else {
+				triangleClone [i].blueLeft = false;
+			}
+
 		}
 
 	}
